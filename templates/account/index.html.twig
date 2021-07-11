@@ -4,15 +4,22 @@
 {% endblock %}
 
 {% block content %}
+
+	<hr>
+	<hr>
 	<h1>Mon compte</h1>
 
 	Bienvenue
-	{{ (app.user.nom) }}
-	<br>
+
+	{{ (app.user.prenom) }}
+
 	c'est ici que vous allez pouvoir gerer vos informations personnelles
 	<hr>
-	{# 
-		Modifier mon mot de passe
-		ajouter mes adresses
-		gerer mes commandes #}
+
+	<a href="{{path('account_password')}}">Modifier mon mot de passe</a>
+	<br/>
+	ajouter mes adresses
+	<br/>
+	gerer mes commandes
+	<br/>
 {% endblock %}
