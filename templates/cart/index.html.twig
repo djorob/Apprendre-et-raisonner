@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Panier - Apprendre et raisonner
+{% endblock %}
+
+{% block content %}
+	<hr>
+	<h1>
+		Mon Panier</h1>
+
+	Les produits que vous avez ajouter a votre panier
+	<hr>
+
+	Mon panier
+
+	<table class="table">
+		<thead>
+			<tr>
+
+				<th scope="col">Produits</th>
+				<th scope="col">Quantité</th>
+				<th scope="col">Prix</th>
+				<th scope="col">total</th>
+			</tr>
+		</thead>
+		<tbody>
+			{%  for product in cart %}
+				{{ dump(product) }}
+				<tr>
+					<th>
+						XXX</th>
+					<td>xxxxx</td>
+					<td>Otto</td>
+					<td>@mdo</td>
+				</tr>
+			{% endfor %}
+
+		</tbody>
+	</table>
+
+{% endblock %}

@@ -2,9 +2,12 @@
 
 namespace App\Repository;
 
+use App\Classe\Search;
 use App\Entity\Product;
+use App\Form\SearchType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Category;
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +20,43 @@ class ProductRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Product::class);
+    }
+
+
+    /**
+   *  this request will pick up the products depends of the users request
+   * @return Product[]
+   */ 
+    
+    public function findWithSearch(Search $search)
+    
+    {
+        $query = $this
+        ->createQueryBuilder('p')
+        // what do you want for the section : product and category
+        ->select('c', 'p')
+        // i want a join between categories of my product 
+        ->join('p.category','c' );
+
+        if (!empty($search->categories)) {
+            $query = $query
+                ->andWhere('c.id IN (:categories)')
+                ->setParameter('categories', $search->categories);
+
+        }
+
+        if (!empty($search->string)) {
+            $query = $query
+
+            ->andWhere('p.name LIKE :string')
+            ->setParameter('string', "%($search->string)%");
+
+             
+        }
+
+        // I want a return of my query
+
+        return $query->getQuery()->getResult();
     }
 
     // /**
