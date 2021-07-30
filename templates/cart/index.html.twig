@@ -12,30 +12,60 @@
 	<hr>
 
 	Mon panier
-
-	<table class="table">
-		<thead>
-			<tr>
-
-				<th scope="col">Produits</th>
-				<th scope="col">Quantité</th>
-				<th scope="col">Prix</th>
-				<th scope="col">total</th>
-			</tr>
-		</thead>
-		<tbody>
-			{%  for product in cart %}
-				{{ dump(product) }}
+	{% if cart|length > 0 %}
+		<table class="table mt-3">
+			<thead>
 				<tr>
-					<th>
-						XXX</th>
-					<td>xxxxx</td>
-					<td>Otto</td>
-					<td>@mdo</td>
+
+					<th scope="col">Produits</th>
+					<th scope="col"></th>
+					<th scope="col">Quantité</th>
+					<th scope="col">Prix</th>
+					<th scope="col">total</th>
+					<th scope="col"></th>
 				</tr>
-			{% endfor %}
+			</thead>
+			<tbody>
+				{# this loop is for display the total of the products I want to play  #}
+				{% set total = null %}
+				{# to display the product  #}
+				{%  for product in cart %}
 
-		</tbody>
-	</table>
+					<tr>
+						<th>
+							<img src="uploads/{{ product.product.illustration}}" height="50px" alt="{{ product.product.name }}">
+							<br/>
+						</th>
+						<td>{{ product.product.name }}
+							<br/>
+							<small>{{ product.product.subtitle }}</small>
+						</td>
+						<td>
+							<a href="{{path('add_to_cart', {'id' : product.product.id})}}">
+								<img src="{{ asset('assets/img/plus.png')}}" height="12px" alt="Ajouter un produit">
+							</a>
+							{{ product.quantity }}
+							<a href="{{path('decrease_to_cart', {'id' : product.product.id})}}">
+								<img src="{{ asset('assets/img/remove.png')}}" height="12px" alt="retirer un produit">
+							</a>
+						</td>
 
-{% endblock %}
+						<td>{{ (product.product.price * product.quantity / 100)| number_format(2) }}
+							€</td>
+						<td>
+							<a href="{{ path('delete_to_cart', {'id' : product.product.id}) }}">
+
+								<img src="{{ asset('assets/img/bin.png')}}" height="18px" alt="supprimer mon produit">
+								<a/></td>
+						</td>
+					</tr>
+				</a>
+			</tbody>
+		</tr>
+
+
+		{% set total = total + (product.product.price * product.quantity)  %}
+	{% endfor %}
+</tbody></table><div class="text-right">
+<b>nombre de Produits :{{ cart|length }}</b><br/><b>Total de mon panier :{{ (total/ 100)| number_format(2) }}€</b><br/><a href="" class="btn btn-success btn-block mt-3">Valider mon panier</a><br/></div>{% else %}<hr/><p>
+votre panier est vide !!</p>{% endif %}{% endblock %}

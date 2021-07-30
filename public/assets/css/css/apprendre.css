@@ -18,6 +18,7 @@ body {
     width: 100%;
     background-color: aqua;
     padding-top: 25px;
+    margin-top: 50px;
 
 }
 
@@ -60,6 +61,12 @@ body {
 
     font-size: 18px;
     
+}
+
+.cart-icon {
+
+    height : 20px;
+    padding-left: 20px;
 }
 
 
