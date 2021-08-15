@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une adresse - Apprendre et raisonner
+{% endblock %}
+
+{% block content %}
+
+	<hr/>
+
+	<h1>Gérer mes  adresses</h1>
+
+
+	c'est ici que vous allez pouvoir gerer vos adresses personnelles
+	<a href="{{ path('account')}}">
+		Retour à mon compte</a>
+	<hr>
+	{# display the form to add an adress #}
+
+	{{ form_start(form) }}
+	<div class="row">
+		<div class="col-md-12">
+			{{ form_row(form.name) }}</div>
+
+		<div class="col-md-6">
+			{{ form_row(form.firstname) }}</div>
+
+		<div class="col-md-6">
+			{{ form_row(form.lastname) }}</div>
+
+		<div class="col-md-6">
+			{{ form_row(form.company) }}</div>
+
+		<div class="col-md-6">
+			{{ form_row(form.adress) }}</div>
+
+		<div class="col-md-6">
+			{{ form_row(form.postal) }}</div>
+
+		<div class="col-md-6">
+			{{ form_row(form.city) }}</div>
+
+		<div class="col-md-6">
+			{{ form_row(form.country) }}</div>
+		<div class="col-md-6">
+			{{ form_row(form.phone) }}</div>
+
+
+	</div>
+
+
+	{{ form_end(form) }}
+
+
+{% endblock %}
